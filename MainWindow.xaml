@@ -1,0 +1,73 @@
+﻿<Window x:Class="tradelens.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:tradelens"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        mc:Ignorable="d"
+        Title="Tradelens" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="curr" TargetType="Button">
+            <Setter Property="Width" Value="140"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FF040404">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+        <Button x:Name="usd_button" HorizontalAlignment="Center" Margin="0,30,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="usd">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="usa.png" Margin="0,0,10,0" Height="35"></Image>
+                <Label Content="00,00" FontSize="20" x:Name="usd"></Label>
+            </StackPanel>
+        </Button>
+        <Button x:Name="eur_button" HorizontalAlignment="Center" Margin="0,90,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="eur">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="eu.png" Margin="0,0,10,0" Height="35"></Image>
+                <Label Content="00,00" FontSize="20" x:Name="eur"></Label>
+            </StackPanel>
+        </Button>
+        <Button x:Name="gbp_button" HorizontalAlignment="Center" Margin="0,150,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="gbp">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="united-kingdom.png" Margin="0,0,10,0" Height="35"></Image>
+                <Label Content="00,00" FontSize="20" x:Name="gbp"></Label>
+            </StackPanel>
+        </Button>
+        <Button x:Name="jpy_button" HorizontalAlignment="Center" Margin="0,210,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="jpy">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="japan.png" Margin="0,0,10,0" Height="35"></Image>
+                <Label Content="00,00" FontSize="20" x:Name="jpy"></Label>
+            </StackPanel>
+        </Button>
+        <Button x:Name="chf_button" HorizontalAlignment="Center" Margin="0,270,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="chf">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="switzerland.png" Margin="0,0,10,0" Height="35"></Image>
+                <Label Content="00,00" FontSize="20" x:Name="chf"></Label>
+            </StackPanel>
+        </Button>
+        <Button x:Name="cad_button" HorizontalAlignment="Center" Margin="0,330,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="cad">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="canada.png" Margin="0,0,10,0" Height="35"></Image>
+                <Label Content="00,00" FontSize="20" x:Name="cad"></Label>
+            </StackPanel>
+        </Button>
+        <oxy:PlotView x:Name="wykres" Grid.Column="1" Margin="10,30,10,32" />
+    </Grid>
+</Window>
