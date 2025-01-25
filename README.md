@@ -2,7 +2,7 @@
 aplikacja do monitorowania cen forex napisana w wpf. <br>
 aplikacja umozliwia:
 - monitorowanie cen 6 walut (usd, eur, gbp, jpy, chf, cad)
-- tworzenie tygodniowych wykresow dla tych walut
+- tworzenie tygodniowych wykresow dla tych walut <br>
 w przyszlosci dodam:
 - ceny akcji na gieldzie
 - mozliwosc zmiany waluty
