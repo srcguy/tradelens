@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:tradelens"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
+        Icon="img\icon.ico"
         Title="Tradelens" Height="450" Width="800">
     <Window.Resources>
         <Style x:Key="curr" TargetType="Button">
@@ -22,6 +23,11 @@
                     <Setter Property="Cursor" Value="Hand"/>
                 </Trigger>
             </Style.Triggers>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5" />
+                </Style>
+            </Style.Resources>
         </Style>
     </Window.Resources>
     <Grid Background="#FF040404">
@@ -34,40 +40,54 @@
         </Grid.RowDefinitions>
         <Button x:Name="usd_button" HorizontalAlignment="Center" Margin="0,30,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="usd">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Image Source="usa.png" Margin="0,0,10,0" Height="35"></Image>
+                <Image Source="img/usa.png" Margin="0,0,10,0" Height="35"></Image>
                 <Label Content="00,00" FontSize="20" x:Name="usd"></Label>
             </StackPanel>
         </Button>
         <Button x:Name="eur_button" HorizontalAlignment="Center" Margin="0,90,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="eur">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Image Source="eu.png" Margin="0,0,10,0" Height="35"></Image>
+                <Image Source="img/eu.png" Margin="0,0,10,0" Height="35"></Image>
                 <Label Content="00,00" FontSize="20" x:Name="eur"></Label>
             </StackPanel>
         </Button>
         <Button x:Name="gbp_button" HorizontalAlignment="Center" Margin="0,150,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="gbp">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Image Source="united-kingdom.png" Margin="0,0,10,0" Height="35"></Image>
+                <Image Source="img/united-kingdom.png" Margin="0,0,10,0" Height="35"></Image>
                 <Label Content="00,00" FontSize="20" x:Name="gbp"></Label>
             </StackPanel>
         </Button>
         <Button x:Name="jpy_button" HorizontalAlignment="Center" Margin="0,210,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="jpy">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Image Source="japan.png" Margin="0,0,10,0" Height="35"></Image>
+                <Image Source="img/japan.png" Margin="0,0,10,0" Height="35"></Image>
                 <Label Content="00,00" FontSize="20" x:Name="jpy"></Label>
             </StackPanel>
         </Button>
         <Button x:Name="chf_button" HorizontalAlignment="Center" Margin="0,270,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="chf">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Image Source="switzerland.png" Margin="0,0,10,0" Height="35"></Image>
+                <Image Source="img/switzerland.png" Margin="0,0,10,0" Height="35"></Image>
                 <Label Content="00,00" FontSize="20" x:Name="chf"></Label>
             </StackPanel>
         </Button>
         <Button x:Name="cad_button" HorizontalAlignment="Center" Margin="0,330,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="cad">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Image Source="canada.png" Margin="0,0,10,0" Height="35"></Image>
+                <Image Source="img/canada.png" Margin="0,0,10,0" Height="35"></Image>
                 <Label Content="00,00" FontSize="20" x:Name="cad"></Label>
             </StackPanel>
         </Button>
-        <oxy:PlotView x:Name="wykres" Grid.Column="1" Margin="10,30,10,32" />
+        <Border BorderBrush="Beige" BorderThickness="2" CornerRadius="5" Grid.Column="1" Margin="10,30,10,32">
+            <oxy:PlotView x:Name="wykres" Background="Black" Foreground="Black"/>
+        </Border>
+        <Button x:Name="btc_button" HorizontalAlignment="Center" Grid.Column="2" Margin="0,30,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="btc">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="img/bitcoin.png" Margin="0,0,10,0" Height="35"></Image>
+                <Label Content="00,00" FontSize="15" x:Name="btc"></Label>
+            </StackPanel>
+        </Button>
+        <Button x:Name="eth_button" HorizontalAlignment="Center" Grid.Column="2" Margin="0,90,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="eth">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="img/ethereum.png" Margin="0,0,10,0" Height="35"></Image>
+                <Label Content="00,00" FontSize="15" x:Name="eth"></Label>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

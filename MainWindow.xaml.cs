@@ -18,6 +18,7 @@ using OxyPlot.Wpf;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Security.Policy;
 using System;
+using OxyPlot.Axes;
 
 namespace tradelens
 {
@@ -30,15 +31,45 @@ namespace tradelens
         {
             string currency = ((Button)sender).Tag as string; //pobiera wartosc z Tag (walute)
 
-            var plotModel = new PlotModel { Title = currency+"/pln" }; //tytul wykresy
+            var plotModel = new PlotModel 
+            { 
+                Title = currency+"/pln", //tytul
+                TitleColor = OxyColors.White //kolor
+            };
 
             var lineSeries = new LineSeries //nowa linia na wykresie
             {
-                Title = "Cena",
+                Title = currency+"/pln",
                 MarkerType = MarkerType.Circle,
                 MarkerSize = 3,
-                StrokeThickness = 2
+                StrokeThickness = 2,
+                Color = OxyColors.White //kolor linii
+
             };
+
+            var X = new DateTimeAxis
+            {
+                Position = AxisPosition.Bottom,
+                Title = "Data",
+                StringFormat = "dd-MM-yy",
+                IntervalType = DateTimeIntervalType.Days, //odstępy w dniach
+                MinorIntervalType = DateTimeIntervalType.Hours, //mniejszy odstep
+                TitleColor = OxyColors.White,     //tytul kolor
+                TextColor = OxyColors.White,    //kolor tekstu
+                TicklineColor = OxyColors.White  //kolor linii
+            };
+
+            var Y = new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                Title = "Cena",
+                TitleColor = OxyColors.White,
+                TextColor = OxyColors.White,  
+                TicklineColor = OxyColors.White
+            };
+
+            plotModel.Axes.Add(X);
+            plotModel.Axes.Add(Y);
 
             List<string> urls = [ //lista adresow url plikow z cenami do pobrania
             "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/" + currency + ".json"];
@@ -63,7 +94,7 @@ namespace tradelens
                 {
                     double y = Math.Round(doc.RootElement.GetProperty(currency).GetProperty("pln").GetDouble(), 4); //y ustawiam na odczytana wartosc pln z listy currency z dokladnoscia 4 miejsc p.p
 
-                    lineSeries.Points.Add(new DataPoint(double.Parse(DateTime.Now.AddDays(-n).ToString("MMdd")), y)); //dodaje punkt o wartosci x jako date dzisiaj -iteracje i wartoscia y jako cene w tym dniu
+                    lineSeries.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-n)), y)); //dodaje punkt o wartosci x jako date dzisiaj -iteracje i wartoscia y jako cene w tym dniu
                 }
 
                 n++;
@@ -86,7 +117,7 @@ namespace tradelens
         {
             InitializeComponent();
 
-            List<string> curriencies = ["usd", "eur", "gbp", "jpy", "chf", "cad"]; //lista wszystkich walut
+            List<string> curriencies = ["usd", "eur", "gbp", "jpy", "chf", "cad", "btc", "eth"]; //lista wszystkich walut
 
             DateTime date = DateTime.Now.AddDays(-1); //wczorajsza data
 
