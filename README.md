@@ -7,7 +7,6 @@ aplikacja umozliwia:
 <!-- -->
 
 w przyszlosci dodam:
-- mozliwosc zmiany waluty
 - mozliwosc dodania monitora dla wybranych walut
 - mozliwosc zmiany okna czasowego dla wykresow
-- nowe wyglady aplikacji (white mode, high contrast itp)
+- nowe style aplikacji (white mode, high contrast itp)
