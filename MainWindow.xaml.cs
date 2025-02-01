@@ -19,6 +19,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Security.Policy;
 using System;
 using OxyPlot.Axes;
+using addons;
 
 namespace tradelens
 {
@@ -33,13 +34,13 @@ namespace tradelens
 
             var plotModel = new PlotModel 
             { 
-                Title = currency+"/pln", //tytul
+                Title = currency+"/"+File.ReadAllText("currency.txt"), //tytul
                 TitleColor = OxyColors.White //kolor
             };
 
             var lineSeries = new LineSeries //nowa linia na wykresie
             {
-                Title = currency+"/pln",
+                Title = currency+ "/" + File.ReadAllText("currency.txt"),
                 MarkerType = MarkerType.Circle,
                 MarkerSize = 3,
                 StrokeThickness = 2,
@@ -92,7 +93,7 @@ namespace tradelens
 
                 using (JsonDocument doc = JsonDocument.Parse(jsonContent))//zamieniam tekst na jsondocument
                 {
-                    double y = Math.Round(doc.RootElement.GetProperty(currency).GetProperty("pln").GetDouble(), 4); //y ustawiam na odczytana wartosc pln z listy currency z dokladnoscia 4 miejsc p.p
+                    double y = Math.Round(doc.RootElement.GetProperty(currency).GetProperty(File.ReadAllText("currency.txt")).GetDouble(), 8); //y ustawiam na odczytana wartosc pln z listy currency z dokladnoscia 4 miejsc p.p
 
                     lineSeries.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-n)), y)); //dodaje punkt o wartosci x jako date dzisiaj -iteracje i wartoscia y jako cene w tym dniu
                 }
@@ -110,21 +111,33 @@ namespace tradelens
 
             using (JsonDocument doc = JsonDocument.Parse(jsonContent)) //zamienia tekst na jsondocument
             {
-                return doc.RootElement.GetProperty(currency).GetProperty("pln").GetDouble(); //zwraca wartosc pln z listy currency (np usd) i zamienia na dobule
+                return doc.RootElement.GetProperty(currency).GetProperty(File.ReadAllText("currency.txt")).GetDouble(); //zwraca wartosc pln z listy currency (np usd) i zamienia na dobule
             }
         }
-        public MainWindow()
-        {
-            InitializeComponent();
 
+        private void show_settings(object sender, RoutedEventArgs e)
+        {
+            var settingsPanel = new settingsPanel();
+            settingsPanel.usun += usunUstawienia; //dodaje zdarzenie
+            settings.Content = settingsPanel;
+        }
+
+        private void usunUstawienia()
+        {
+            settings.Content = null; //usuwam settingspanel
+            currenciesButtons();
+        }
+
+        private void currenciesButtons()
+        {
             List<string> curriencies = ["usd", "eur", "gbp", "jpy", "chf", "cad", "btc", "eth"]; //lista wszystkich walut
 
             DateTime date = DateTime.Now.AddDays(-1); //wczorajsza data
 
             foreach (string currency in curriencies)
-            { 
-                string url = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/"+currency+".json"; //najnowszy plik z cenami
-                string url_old = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@"+date.ToString("yyyy-MM-dd")+"/v1/currencies/"+currency+".json"; //wczorajszy plik
+            {
+                string url = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/" + currency + ".json"; //najnowszy plik z cenami
+                string url_old = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@" + date.ToString("yyyy-MM-dd") + "/v1/currencies/" + currency + ".json"; //wczorajszy plik
 
                 string path = "curr.json";
                 string path_old = "curr_old.json";
@@ -160,6 +173,12 @@ namespace tradelens
 
             }
 
+        }
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            currenciesButtons();
         }
 
     }
