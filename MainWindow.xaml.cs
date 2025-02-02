@@ -93,9 +93,9 @@ namespace tradelens
 
                 using (JsonDocument doc = JsonDocument.Parse(jsonContent))//zamieniam tekst na jsondocument
                 {
-                    double y = Math.Round(doc.RootElement.GetProperty(currency).GetProperty(File.ReadAllText("currency.txt")).GetDouble(), 8); //y ustawiam na odczytana wartosc pln z listy currency z dokladnoscia 4 miejsc p.p
+                    double y = Math.Round(doc.RootElement.GetProperty(currency).GetProperty(File.ReadAllText("currency.txt")).GetDouble(), 4); //y ustawiam na odczytana wartosc pln z listy currency z dokladnoscia 4 miejsc p.p
 
-                    lineSeries.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-n)), y)); //dodaje punkt o wartosci x jako date dzisiaj -iteracje i wartoscia y jako cene w tym dniu
+                    lineSeries.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.Date.AddDays(-n)), y)); //dodaje punkt o wartosci x jako date dzisiaj -iteracje i wartoscia y jako cene w tym dniu
                 }
 
                 n++;

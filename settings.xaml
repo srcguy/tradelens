@@ -27,14 +27,19 @@
             </Style.Resources>
         </Style>
     </UserControl.Resources>
-    <Grid Background="Black" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Button x:Name="sett_button" HorizontalAlignment="Right" Margin="0,330,8,0" Style="{StaticResource przyc}" Click="back" Grid.Column="1">
+    <Grid Background="#FF040404" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="sett_button" HorizontalAlignment="Center" Grid.Column="2" Margin="0,330,0,0" Style="{StaticResource przyc}" Click="back">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="img/arrow.png" Margin="0,0,0,0" Height="35"></Image>
                 <Label Content="Panel główny" FontSize="15" x:Name="sett" Height="33"/>
             </StackPanel>
         </Button>
-        <ListBox x:Name="listawalut" HorizontalAlignment="Left" Margin="46,85,0,0" VerticalAlignment="Top" Width="120" Height="100" SelectionChanged="listazmiana" RenderTransformOrigin="0.555,0.484"/>
-        <Label Content="Wybierz walutę bazową" Foreground="White" HorizontalAlignment="Left" Margin="23,31,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <ListBox x:Name="listawalut" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="200" SelectionChanged="listazmiana" Grid.Column="1" Margin="163,0,0,0"/>
+        <Label Content="Wybierz walutę bazową" Foreground="White" HorizontalAlignment="Left" Margin="141,54,0,0" VerticalAlignment="Top" FontSize="15" Grid.Column="1"/>
     </Grid>
 </UserControl>
