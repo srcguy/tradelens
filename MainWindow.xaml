@@ -89,6 +89,18 @@
                 <Label Content="00,00" FontSize="15" x:Name="eth"></Label>
             </StackPanel>
         </Button>
+        <Button x:Name="custom1_button" HorizontalAlignment="Center" Grid.Column="2" Margin="0,150,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="custom">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="XXX" FontSize="15" x:Name="custom_name1" VerticalAlignment="Center" Padding="2"></Label>
+                <Label Content="00,00" FontSize="15" x:Name="custom1"></Label>
+            </StackPanel>
+        </Button>
+        <Button x:Name="custom2_button" HorizontalAlignment="Center" Grid.Column="2" Margin="0,210,0,0" Style="{StaticResource curr}" Click="wykres_kreator" Tag="custom">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="XXX" FontSize="15" x:Name="custom_name2" VerticalAlignment="Center" Padding="2"></Label>
+                <Label Content="00,00" FontSize="15" x:Name="custom2"></Label>
+            </StackPanel>
+        </Button>
         <Button x:Name="sett_button" HorizontalAlignment="Center" Grid.Column="2" Margin="0,330,0,0" Style="{StaticResource curr}" Click="show_settings">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="img/settings.png" Margin="0,0,5,0" Height="35"></Image>

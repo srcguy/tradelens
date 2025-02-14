@@ -39,7 +39,13 @@
                 <Label Content="Panel główny" FontSize="15" x:Name="sett" Height="33"/>
             </StackPanel>
         </Button>
-        <ListBox x:Name="listawalut" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="200" SelectionChanged="listazmiana" Grid.Column="1" Margin="163,0,0,0"/>
-        <Label Content="Wybierz walutę bazową" Foreground="White" HorizontalAlignment="Left" Margin="141,54,0,0" VerticalAlignment="Top" FontSize="15" Grid.Column="1"/>
+        <ListBox x:Name="listawalut" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="200" SelectionChanged="listazmiana" Grid.Column="1" Margin="23,0,0,0"/>
+        <Label Content="Wybierz walutę bazową" Foreground="White" HorizontalAlignment="Left" Margin="0,59,0,0" VerticalAlignment="Top" FontSize="15" Grid.Column="1"/>
+
+        <ListBox x:Name="listawalutcustom1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="80" SelectionChanged="listazmianacustom1" Grid.Column="1" Margin="274,110,0,0"/>
+        <Label Content="Wybierz niestandardową walutę nr 1" Foreground="White" HorizontalAlignment="Right" Margin="0,59,21,0" VerticalAlignment="Top" FontSize="15" Grid.Column="1"/>
+
+        <ListBox x:Name="listawalutcustom2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="80" SelectionChanged="listazmianacustom2" Grid.Column="1" Margin="274,245,0,0"/>
+        <Label Content="Wybierz niestandardową walutę nr 2" Foreground="White" HorizontalAlignment="Right" Margin="0,204,21,0" VerticalAlignment="Top" FontSize="15" Grid.Column="1"/>
     </Grid>
 </UserControl>

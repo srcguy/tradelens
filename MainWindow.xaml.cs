@@ -34,13 +34,13 @@ namespace tradelens
 
             var plotModel = new PlotModel 
             { 
-                Title = currency+"/"+File.ReadAllText("currency.txt"), //tytul
+                Title = currency+"/"+File.ReadAllText("data/currency.txt"), //tytul
                 TitleColor = OxyColors.White //kolor
             };
 
             var lineSeries = new LineSeries //nowa linia na wykresie
             {
-                Title = currency+ "/" + File.ReadAllText("currency.txt"),
+                Title = currency+ "/" + File.ReadAllText("data/currency.txt"),
                 MarkerType = MarkerType.Circle,
                 MarkerSize = 3,
                 StrokeThickness = 2,
@@ -86,14 +86,14 @@ namespace tradelens
             {
                 using (WebClient webClient = new WebClient()) //pobieram plik z neta
                 {
-                    webClient.DownloadFile(Url, "chart.json");
+                    webClient.DownloadFile(Url, "data/chart.json");
                 }
 
-                string jsonContent = File.ReadAllText("chart.json");
+                string jsonContent = File.ReadAllText("data/chart.json");
 
                 using (JsonDocument doc = JsonDocument.Parse(jsonContent))//zamieniam tekst na jsondocument
                 {
-                    double y = Math.Round(doc.RootElement.GetProperty(currency).GetProperty(File.ReadAllText("currency.txt")).GetDouble(), 4); //y ustawiam na odczytana wartosc pln z listy currency z dokladnoscia 4 miejsc p.p
+                    double y = Math.Round(doc.RootElement.GetProperty(currency).GetProperty(File.ReadAllText("data/currency.txt")).GetDouble(), 4); //y ustawiam na odczytana wartosc pln z listy currency z dokladnoscia 4 miejsc p.p
 
                     lineSeries.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.Date.AddDays(-n)), y)); //dodaje punkt o wartosci x jako date dzisiaj -iteracje i wartoscia y jako cene w tym dniu
                 }
@@ -111,7 +111,7 @@ namespace tradelens
 
             using (JsonDocument doc = JsonDocument.Parse(jsonContent)) //zamienia tekst na jsondocument
             {
-                return doc.RootElement.GetProperty(currency).GetProperty(File.ReadAllText("currency.txt")).GetDouble(); //zwraca wartosc pln z listy currency (np usd) i zamienia na dobule
+                return doc.RootElement.GetProperty(currency).GetProperty(File.ReadAllText("data/currency.txt")).GetDouble(); //zwraca wartosc pln z listy currency (np usd) i zamienia na dobule
             }
         }
 
@@ -126,21 +126,23 @@ namespace tradelens
         {
             settings.Content = null; //usuwam settingspanel
             currenciesButtons();
+            custom1Button();
+            custom2Button();
         }
 
         private void currenciesButtons()
         {
-            List<string> curriencies = ["usd", "eur", "gbp", "jpy", "chf", "cad", "btc", "eth"]; //lista wszystkich walut
+            List<string> currencies = ["usd", "eur", "gbp", "jpy", "chf", "cad", "btc", "eth"]; //lista wszystkich walut
 
             DateTime date = DateTime.Now.AddDays(-1); //wczorajsza data
 
-            foreach (string currency in curriencies)
+            foreach (string currency in currencies)
             {
                 string url = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/" + currency + ".json"; //najnowszy plik z cenami
                 string url_old = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@" + date.ToString("yyyy-MM-dd") + "/v1/currencies/" + currency + ".json"; //wczorajszy plik
 
-                string path = "curr.json";
-                string path_old = "curr_old.json";
+                string path = "data/curr.json";
+                string path_old = "data/curr_old.json";
 
                 using (WebClient webClient = new WebClient()) //pobieram pliki
                 {
@@ -174,11 +176,97 @@ namespace tradelens
             }
 
         }
+        private void custom1Button()
+        {
+            string customcurrency1 = File.ReadAllText("data/custom1.txt");
+
+            DateTime date = DateTime.Now.AddDays(-1); //wczorajsza data
+
+            string url = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/" + customcurrency1 + ".json"; //najnowszy plik z cenami
+            string url_old = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@" + date.ToString("yyyy-MM-dd") + "/v1/currencies/" + customcurrency1 + ".json"; //wczorajszy plik
+
+            string path = "data/curr.json";
+            string path_old = "data/curr_old.json";
+
+            using (WebClient webClient = new WebClient()) //pobieram pliki
+            {
+                webClient.DownloadFile(url, path);
+                webClient.DownloadFile(url_old, path_old);
+            }
+
+            double pln1 = pln(path, customcurrency1); //do pln1 przypisuje wynik funkcji pln z atrybutami path i currency
+
+            double pln2 = pln(path_old, customcurrency1); //-||-
+
+            custom1.Content = Math.Round(pln1, 2); //zaokrąglenie do 2 miejsc p.p
+
+            custom_name1.Content = customcurrency1;
+            custom1_button.Tag = customcurrency1;
+
+            if (pln1 > pln2)
+            {
+                custom1_button.Background = new SolidColorBrush(Color.FromRgb(23, 179, 28)); //zmiana kolory
+            }
+            else if (pln2 > pln1)
+            {
+                custom1_button.Background = new SolidColorBrush(Color.FromRgb(194, 17, 17));
+            }
+            else
+            {
+                custom1_button.Background = new SolidColorBrush(Colors.Gray);
+            }
+        }
+
+        private void custom2Button()
+        {
+            string customcurrency1 = File.ReadAllText("data/custom2.txt");
+
+            DateTime date = DateTime.Now.AddDays(-1); //wczorajsza data
+
+            string url = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/" + customcurrency1 + ".json"; //najnowszy plik z cenami
+            string url_old = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@" + date.ToString("yyyy-MM-dd") + "/v1/currencies/" + customcurrency1 + ".json"; //wczorajszy plik
+
+            string path = "data/curr.json";
+            string path_old = "data/curr_old.json";
+
+            using (WebClient webClient = new WebClient()) //pobieram pliki
+            {
+                webClient.DownloadFile(url, path);
+                webClient.DownloadFile(url_old, path_old);
+            }
+
+            double pln1 = pln(path, customcurrency1); //do pln1 przypisuje wynik funkcji pln z atrybutami path i currency
+
+            double pln2 = pln(path_old, customcurrency1); //-||-
+
+            custom2.Content = Math.Round(pln1, 2); //zaokrąglenie do 2 miejsc p.p
+
+            custom_name2.Content = customcurrency1;
+            custom2_button.Tag = customcurrency1;
+
+            if (pln1 > pln2)
+            {
+                custom2_button.Background = new SolidColorBrush(Color.FromRgb(23, 179, 28)); //zmiana kolory
+            }
+            else if (pln2 > pln1)
+            {
+                custom2_button.Background = new SolidColorBrush(Color.FromRgb(194, 17, 17));
+            }
+            else
+            {
+                custom2_button.Background = new SolidColorBrush(Colors.Gray);
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
 
             currenciesButtons();
+
+            custom1Button();
+
+            custom2Button();
         }
 
     }
