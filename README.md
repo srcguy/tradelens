@@ -13,4 +13,4 @@ w przyszlosci dodam:
   
 <!-- -->
 
-![image](https://github.com/user-attachments/assets/25b563a1-c038-4b25-9034-bd33e39fdc17)
+![image](https://github.com/user-attachments/assets/addf70de-71bd-4b73-88f9-6bbe75a78ecc)
