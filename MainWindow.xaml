@@ -108,5 +108,6 @@
             </StackPanel>
         </Button>
         <ContentControl x:Name="settings" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Padding="0" />
+        <Label Grid.Column="2" Content="Pobieranie danych..." HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top" Foreground="White" x:Name="download_text"/>
     </Grid>
 </Window>
